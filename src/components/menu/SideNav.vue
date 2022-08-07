@@ -5,7 +5,7 @@
         <ul>
             <li v-for="item in navItem" :key="item.id" >
                 <a :href="item.link" class="nav-link">{{ item.name }}</a>
-            </li>
+            </li>        
         </ul>
     </nav>
 </template>
@@ -60,7 +60,7 @@ h2,h3{
 
     .bloc{
         position:absolute;
-        background-color:#dddddd;
+        background-color: #f0efe8;
         height: 230px;
         width: 931px;
         max-width: 100%;
@@ -83,6 +83,7 @@ h2,h3{
     }
     .main-nav>ul>li{
         list-style: none;
+        opacity: 0;
     }
 
     .main-nav>ul>li>a{
@@ -97,17 +98,27 @@ h2,h3{
         color: yellowgreen;
     }
 
-    .open-menu{
-        animation: 1s ease-in-out slide-in;
+    .open-menu>ul>li{
+        animation: .7s ease-in-out slide-in forwards;
     }
-    
+
+    .open-menu>ul>li:nth-child(1){ animation-delay: 100ms; }
+
+    .open-menu>ul>li:nth-child(2){ animation-delay: 200ms; }
+
+    .open-menu>ul>li:nth-child(3){ animation-delay: 300ms; }
     @keyframes slide-in{
-        from{
+        0%{
             opacity: 0;
+            transform: translateX(-70px);
+        }
+        50%{
+            opacity: .5;
         }
 
-        to{
+        100%{
             opacity:1;
+            transform: translateX(0px);
         }
     }
 
@@ -146,6 +157,7 @@ h2,h3{
         .banner{
             top: -101px;
         }
-
     }
+
+    @media screen and (min-width:970px){ .main-nav>ul>li {opacity: 1;}}
 </style>

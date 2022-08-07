@@ -13,7 +13,7 @@ export default {
     name: 'HeaderVue',
     data() {
         return {
-            store
+            store,
         }
     },
     components:{
@@ -30,6 +30,7 @@ header{
     animation: slide .4s;
     align-items: baseline;
     position: relative;
+    background-color: #f0efe8;
 }
 
 .nav-link{
