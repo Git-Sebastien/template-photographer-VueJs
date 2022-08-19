@@ -1,4 +1,12 @@
 <template>
+<div class="background-modal" id="modal" @click="toggle()">
+<div id="layer">
+    <div id="imgDisplay">
+    
+    </div>
+</div>
+ 
+</div>
   <Header/>
   <div class="banner"> 
     <p class="text-image">
@@ -15,11 +23,13 @@
 </template>
 
 <script>
+
 import Header from './components/Header.vue';
 import About from './components/About.vue';
 import Portfolio from './components/Portfolio.vue';
 import Contact from './components/Contact.vue';
 import Footer from './components/Footer.vue';
+import { store } from '@/store';
 
 const routes = {
   '/about':About,
@@ -28,8 +38,10 @@ const routes = {
 export default {
   name: 'App',
   data() {
+    
     return {
-      currentPath:window.location.hash
+        store,        
+        currentPath:window.location.hash,
     }
   },
   computed: {
@@ -39,8 +51,18 @@ export default {
   },
   mounted() {
     window.addEventListener('hashchange',()=>{
-      this.currentPath = window.location.hash
+      this.currentPath = window.location.hash;
     })
+  },
+  methods:{
+    closeModal(){
+        
+    },
+    toggle(){
+       let modal = document.getElementById('modal');
+       modal.style.display="none"
+    }
+
   },
   components: {
     Header,
@@ -54,10 +76,33 @@ export default {
 
 <style>
 
+#app{
+    position: relative;
+}
+
 body{
   padding: 10px;
 }
-  
+
+.background-modal{
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    background-color: #bdad90ad;
+    display: none;
+    animation: fade-in .6s forwards;
+    transition: background-color .5s ease-out; 
+}
+
+#imgDisplay{
+    position: relative;
+}
+
+.event{
+    pointer-events: none;
+}
+
 .banner{
   position: relative;
   top: -92px;
@@ -88,6 +133,14 @@ img{
   max-width: 100%;
 }
 
-
-
+@keyframes fade-in{
+    from{
+        opacity: 0;
+        transition: opacity .5s ease-in;
+    }
+    to{
+        opacity: 1;
+        transition:opacity .5s ease-out
+    }
+}
 </style>

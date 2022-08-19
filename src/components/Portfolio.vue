@@ -13,20 +13,17 @@
                 :key="image.id" :class="image.style">
                 <img 
                 :src="image.imgSrc">
-                <figcaption>
+                <figcaption @click="background(image.imgSrc)">
                     <p>{{ image.caption }}</p>
                     <p class="mt-5">
                         {{ image.publish }}
                     </p>
                 </figcaption>
             </figure> 
-         
     </div>
 </template>
 
 <script>
-
-
 import mixitup from 'mixitup';
 export default {
     name:'PortfolioVue',
@@ -55,7 +52,7 @@ export default {
                 imgSrc:require('@/assets/gallery/street3.jpg'),
                 caption:'Colored street in china',
                 publish:'July 26, 2018',
-                style : " mix street all" 
+                style : "mix street all" 
             },
             {
                 id:4,
@@ -103,8 +100,16 @@ export default {
         }
     },
     mounted(){
-        let container = document.querySelector('.gallery')
-        this.mixer = mixitup(container)
+        let container = document.querySelector('.gallery');
+        this.mixer = mixitup(container);
+    },
+    methods:{
+        background(img){
+          let modal =  document.querySelector('.background-modal');
+          let divImg = document.getElementById('imgDisplay')
+          divImg.innerHTML = `<img src="${img}" id="img-modal">`;
+          modal.style.display ="block";
+        }
     }
 }
 </script>
@@ -120,6 +125,23 @@ export default {
         background-color: #f0efe8
     }
 
+    #img-modal{
+        position: fixed;
+        top: 40px;
+        padding: 20px;
+        background-color: white;
+        width: 487px;
+        height: 636px;
+        left: 50%;
+        transform: translate(-44%, 16%);
+        transition: translate .5s ease-in;
+    }
+
+    #close{
+        position: absolute;
+        transform: translate(28vh,291vh);
+    }
+
     .gallery>figure img{
         max-width: 100%;
         width: 100%;
@@ -129,6 +151,11 @@ export default {
     figure{
         position: relative;
         display: inline-block;
+        width: 326px;
+        height: 400px;
+        background-color: #bdad9066;
+        padding: 20px;
+        cursor: pointer;
     }
 
     figure figcaption{
