@@ -59,7 +59,7 @@
       ></a>
     </section>
     <!-- Section: Social media -->
-  </div>
+</div>
   <!-- Grid container -->
 
   <!-- Copyright -->
@@ -75,6 +75,11 @@
 
 <script>
 export default {
-    name:'FooterVue'
-}
+    name:'FooterVue',
+    data() {
+        return {
+            filter:""
+        }
+    },
+}   
 </script>
